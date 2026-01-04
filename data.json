@@ -1,0 +1,8 @@
+{
+  "users": {},
+  "transactions": [],
+  "balances": {},
+  "settings": {
+    "categories": ["makanan", "transportasi", "belanja", "hiburan", "tagihan", "gaji", "investasi", "lainnya"]
+  }
+}
