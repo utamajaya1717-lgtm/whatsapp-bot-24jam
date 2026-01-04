@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: bot-keuangan-wa
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: TZ
+        value: Asia/Jakarta
+    healthCheckPath: /ping
+    autoDeploy: true
+    disk:
+      name: data-keuangan
+      mountPath: /opt/render/project/src
+      sizeGB: 1
