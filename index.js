@@ -1,3 +1,56 @@
+// Di bagian atas file
+const qrcode = require('qrcode-terminal');
+const fs = require('fs'); // Jangan lupa import fs jika belum ada
+
+// ... konfigurasi lain ...
+
+client.on('qr', (qr) => {
+  // ====== 1. PRINT STRING QR JELAS ======
+  console.log('\n\n🔑 COPY STRING QR INI:');
+  console.log('══════════════════════════════════════════════════');
+  console.log('QR_STRING_START:' + qr + ':QR_STRING_END');
+  console.log('══════════════════════════════════════════════════');
+  
+  // ====== 2. BUAT LINK UNTUK QR GAMBAR ======
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(qr)}`;
+  console.log('\n🌐 LINK UNTUK BUAT QR GAMBAR:');
+  console.log(qrUrl);
+  
+  // ====== 3. SIMPAN KE FILE ======
+  fs.writeFileSync('qr_string.txt', qr);
+  console.log('💾 QR string saved to qr_string.txt');
+  
+  // ====== 4. TAMPILKAN QR VISUAL (opsional) ======
+  console.log('\n📱 QR VISUAL (jika mau coba scan):');
+  qrcode.generate(qr, { small: false });
+});
+
+// Lanjutan event handlers...
+client.on('ready', () => { ... });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ==================== IMPORTS ====================
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
