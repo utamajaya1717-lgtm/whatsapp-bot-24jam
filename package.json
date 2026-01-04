@@ -21,3 +21,12 @@
     "node": ">=18.0.0"
   }
 }
+
+
+{
+  "dependencies": {
+    // ... existing packages ...
+    "googleapis": "^128.0.0",
+    "google-auth-library": "^9.0.0"
+  }
+}
