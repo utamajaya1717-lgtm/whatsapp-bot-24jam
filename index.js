@@ -9,7 +9,7 @@ const path = require('path');
 
 // ==================== KONFIGURASI ====================
 const PREFIX = '!';
-const ADMIN_NUMBER = process.env.ADMIN_NUMBER || '+6281234567890'; // Ganti dengan nomor admin
+const ADMIN_NUMBER = process.env.ADMIN_NUMBER || '+85599921854'; // Ganti dengan nomor admin
 const adminWhatsAppID = ADMIN_NUMBER.includes('@') 
     ? ADMIN_NUMBER 
     : `${ADMIN_NUMBER.replace(/[^0-9]/g, '')}@c.us`;
@@ -262,7 +262,7 @@ client.on('message', async message => {
                         `🎯 *LAINNYA:*\n` +
                         `ℹ️ info\n` +
                         `📞 owner\n` +
-                        `💸 donasi`;
+                        
             
             await message.reply(menu);
             return;
@@ -302,14 +302,7 @@ client.on('message', async message => {
             return;
         }
         
-        if (command === 'donasi') {
-            await message.reply(`💝 *Donasi*\n\n` +
-                               `Dukung pengembangan bot ini dengan donasi:\n` +
-                               `💰 Gopay: 0812-3456-7890\n` +
-                               `🏦 BCA: 1234567890\n\n` +
-                               `Terima kasih atas supportnya! ❤️`);
-            return;
-        }
+    
         
         // ==================== PERINTAH KEUANGAN ====================
         
