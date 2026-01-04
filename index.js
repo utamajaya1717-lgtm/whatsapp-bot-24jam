@@ -1,3 +1,6 @@
+// Baris PERTAMA di index.js
+require('./whatsapp-fix')();
+
 // Di bagian atas file
 const qrcode = require('qrcode-terminal');
 const fs = require('fs'); // Jangan lupa import fs jika belum ada
@@ -380,29 +383,29 @@ client.on('message', async message => {
     // Log pesan
     console.log(`📥 [${moment().format('HH:mm:ss')}] ${userId.split('@')[0]}: ${originalText}`);
     
-    try {
-        // Register user jika belum ada
-        if (!database.users[userId]) {
-            let userName = 'User';
-            try {
-                // FIX: Handle getContact error
-                const contact = await client.getContactById(userId).catch(() => null);
-                if (contact) {
-                    userName = contact.name || contact.pushname || userId.split('@')[0];
-                }
-            } catch (error) {
-                console.log(`⚠️ Could not get contact info for ${userId}`);
+   try {
+    // Register user jika belum ada
+    if (!database.users[userId]) {
+        let userName = 'User';
+        try {
+            // FIX: Handle getContact error
+            const contact = await client.getContactById(userId).catch(() => null);
+            if (contact) {
+                userName = contact.name || contact.pushname || userId.split('@')[0];
             }
-            
-            database.users[userId] = {
-                name: userName,
-                registered: moment().format('YYYY-MM-DD HH:mm:ss'),
-                lastActive: moment().format('YYYY-MM-DD HH:mm:ss')
-            };
-            
-            if (!database.balances[userId]) {
-                database.balances[userId] = 0;
-            }
+        } catch (error) {
+            console.log(`⚠️ Could not get contact info for ${userId}`);  // <-- PERBAIKAN
+        }
+
+        database.users[userId] = {
+            name: userName,
+            registered: moment().format('YYYY-MM-DD HH:mm:ss'),
+            lastActive: moment().format('YYYY-MM-DD HH:mm:ss')
+        };
+
+        if (!database.balances[userId]) {  // <-- PERBAIKAN VARIABLE
+            database.balances[userId] = 0;
+        }
             
             saveDatabase();
             console.log(`👤 New user registered: ${userName} (${userId})`);
