@@ -51,3 +51,25 @@ app.listen(PORT, () => {
   console.log(`🌐 Server running on port ${PORT}`);
   client.initialize();
 });
+
+client.on('qr', (qr) => {
+  // ====== 1. PRINT STRING QR JELAS ======
+  console.log('\n\n🔑 COPY STRING QR INI:');
+  console.log('══════════════════════════════════════════════════');
+  console.log('QR_STRING_START:' + qr + ':QR_STRING_END');
+  console.log('══════════════════════════════════════════════════');
+  
+  // ====== 2. BUAT LINK UNTUK QR GAMBAR ======
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(qr)}`;
+  console.log('\n🌐 LINK UNTUK BUAT QR GAMBAR:');
+  console.log(qrUrl);
+  
+  // ====== 3. SIMPAN KE FILE ======
+  const fs = require('fs');
+  fs.writeFileSync('qr_string.txt', qr);
+  console.log('💾 QR string saved to qr_string.txt');
+  
+  // ====== 4. TAMPILKAN QR VISUAL (opsional) ======
+  console.log('\n📱 QR VISUAL (jika mau coba scan):');
+  qrcode.generate(qr, { small: false });
+});
